@@ -1,0 +1,4475 @@
+:root {
+--bg: #070207;
+--bg-soft: #10050c;
+--pink: #ff4f87;
+--pink-light: #ff9fba;
+--rose: #e93468;
+--white: #fff7fa;
+--muted: #cdb5bd;
+--dim: #806b73;
+--border: rgba(255, 117, 153, 0.2);
+--glass: rgba(255, 255, 255, 0.055);
+}
+
+/* =========================================
+RESET
+========================================= */
+
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+min-height: 100vh;
+overflow-x: hidden;
+
+background:
+    radial-gradient(
+        circle at 50% 0%,
+        rgba(255, 42, 100, 0.09),
+        transparent 35%
+    ),
+    var(--bg);
+
+color: var(--white);
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+}
+
+/* =========================================
+LOCK SCREEN
+========================================= */
+
+.lock-screen {
+position: fixed;
+inset: 0;
+z-index: 5000;
+
+min-height: 100svh;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 24px;
+
+text-align: center;
+
+background:
+    radial-gradient(
+        circle at 50% 40%,
+        rgba(255, 55, 105, 0.15),
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 15% 85%,
+        rgba(160, 20, 80, 0.1),
+        transparent 30%
+    ),
+    #070207;
+
+transition:
+    opacity 1s ease,
+    visibility 1s ease;
+
+}
+
+.lock-screen.unlocking {
+opacity: 0;
+visibility: hidden;
+}
+
+.lock-content {
+width: 100%;
+max-width: 650px;
+
+animation:
+    entrance 1.2s ease forwards;
+
+}
+
+.lock-heart {
+color: var(--pink);
+
+font-size:
+    clamp(65px, 13vw, 105px);
+
+line-height: 1;
+
+margin-bottom: 18px;
+
+text-shadow:
+    0 0 20px rgba(255, 57, 109, 0.4),
+    0 0 60px rgba(255, 57, 109, 0.2);
+
+animation:
+    heartbeat 1.8s infinite;
+
+}
+
+.eyebrow {
+color: var(--pink-light);
+
+font-size: 10px;
+
+letter-spacing: 4px;
+
+text-transform: uppercase;
+
+}
+
+.lock-screen h1 {
+margin: 22px 0 25px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(55px, 11vw, 100px);
+
+line-height: 0.88;
+
+font-weight: 500;
+
+}
+
+.lock-screen h1 span {
+display: block;
+
+color: var(--pink);
+
+font-style: italic;
+
+text-shadow:
+    0 0 35px rgba(255, 60, 110, 0.3);
+
+}
+
+.lock-text {
+max-width: 430px;
+
+margin: auto;
+
+color: var(--muted);
+
+font-size: 13px;
+
+line-height: 1.9;
+
+}
+
+/* =========================================
+PASSWORD
+========================================= */
+
+.password-box {
+display: flex;
+
+width: 100%;
+max-width: 430px;
+
+margin:
+    32px auto 0;
+
+padding: 5px;
+
+border:
+    1px solid var(--border);
+
+border-radius: 100px;
+
+background:
+    rgba(255, 255, 255, 0.04);
+
+box-shadow:
+    inset 0 0 30px rgba(255, 50, 100, 0.02),
+    0 15px 50px rgba(0, 0, 0, 0.25);
+
+backdrop-filter: blur(20px);
+
+}
+
+.password-box input {
+flex: 1;
+
+min-width: 0;
+
+border: 0;
+outline: 0;
+
+background: transparent;
+
+color: white;
+
+padding:
+    13px 18px;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size: 13px;
+
+}
+
+.password-box input::placeholder {
+color: #75616a;
+}
+
+.password-box button {
+border: 0;
+
+cursor: pointer;
+
+padding:
+    12px 22px;
+
+border-radius: 100px;
+
+background:
+    linear-gradient(
+        135deg,
+        #ff5b8b,
+        #df245b
+    );
+
+color: white;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size: 12px;
+
+box-shadow:
+    0 7px 25px rgba(232, 38, 94, 0.2);
+
+transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+}
+
+.password-box button:hover {
+transform: translateY(-2px);
+
+box-shadow:
+    0 10px 35px rgba(232, 38, 94, 0.35);
+
+}
+
+.password-box button:active {
+transform: scale(0.96);
+}
+
+.error-message {
+margin-top: 15px;
+
+color: var(--pink-light);
+
+font-size: 11px;
+
+opacity: 0;
+
+transform: translateY(-5px);
+
+transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+}
+
+.error-message.show {
+opacity: 1;
+
+transform: translateY(0);
+
+}
+
+.hint {
+margin-top: 25px;
+
+color: #59474e;
+
+font-size: 10px;
+
+}
+
+/* =========================================
+MAIN WEBSITE
+========================================= */
+
+.website {
+position: relative;
+
+min-height: 100vh;
+
+isolation: isolate;
+
+}
+
+.hidden {
+display: none !important;
+}
+
+/* =========================================
+BACKGROUND GLOW
+========================================= */
+
+.website::before {
+content: "";
+
+position: fixed;
+
+width: 600px;
+height: 600px;
+
+left: -280px;
+top: -220px;
+
+border-radius: 50%;
+
+background:
+    rgba(255, 30, 90, 0.11);
+
+filter: blur(120px);
+
+pointer-events: none;
+
+z-index: -2;
+
+}
+
+.website::after {
+content: "";
+
+position: fixed;
+
+width: 550px;
+height: 550px;
+
+right: -280px;
+bottom: -220px;
+
+border-radius: 50%;
+
+background:
+    rgba(180, 15, 75, 0.09);
+
+filter: blur(120px);
+
+pointer-events: none;
+
+z-index: -2;
+
+}
+
+/* =========================================
+STARS
+========================================= */
+
+.stars {
+position: fixed;
+
+inset: 0;
+
+z-index: -1;
+
+pointer-events: none;
+
+opacity: 0.35;
+
+background-image:
+    radial-gradient(
+        rgba(255, 255, 255, 0.7) 1px,
+        transparent 1px
+    ),
+    radial-gradient(
+        rgba(255, 150, 180, 0.5) 1px,
+        transparent 1px
+    );
+
+background-size:
+    95px 95px,
+    150px 150px;
+
+background-position:
+    0 0,
+    40px 70px;
+
+}
+
+/* =========================================
+MUSIC BUTTON
+========================================= */
+
+.music-button {
+position: fixed;
+
+top: 18px;
+right: 18px;
+
+z-index: 1000;
+
+border:
+    1px solid var(--border);
+
+border-radius: 100px;
+
+padding:
+    10px 16px;
+
+background:
+    rgba(12, 4, 9, 0.75);
+
+color: var(--white);
+
+cursor: pointer;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size: 11px;
+
+backdrop-filter:
+    blur(15px);
+
+box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.2);
+
+transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+
+}
+
+.music-button:hover {
+transform: translateY(-2px);
+
+background:
+    rgba(255, 65, 115, 0.12);
+
+}
+
+/* =========================================
+HERO
+========================================= */
+
+.hero {
+min-height: 100svh;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+padding:
+    80px 25px 60px;
+
+text-align: center;
+
+}
+
+.hero-content {
+width: 100%;
+
+max-width: 900px;
+
+animation:
+    entrance 1.2s ease;
+
+}
+
+.tiny-heart {
+margin-bottom: 15px;
+
+color: var(--pink);
+
+font-size:
+    clamp(40px, 7vw, 60px);
+
+text-shadow:
+    0 0 25px rgba(255, 57, 109, 0.4);
+
+animation:
+    heartbeat 2s infinite;
+
+}
+
+.hero h1 {
+margin:
+25px 0 35px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(55px, 11vw, 135px);
+
+font-weight: 500;
+
+line-height: 0.8;
+
+letter-spacing: -2px;
+
+}
+
+.hero h1 span {
+display: block;
+
+color: var(--pink);
+
+font-style: italic;
+
+text-shadow:
+    0 0 45px rgba(255, 54, 106, 0.3);
+
+}
+
+.intro-text {
+max-width: 560px;
+
+margin: auto;
+
+color: var(--muted);
+
+font-size: 14px;
+
+line-height: 2;
+
+}
+
+.main-btn {
+margin-top: 40px;
+
+border: 0;
+
+border-radius: 100px;
+
+padding:
+    16px 30px;
+
+background:
+    linear-gradient(
+        135deg,
+        #ff5b8d,
+        #dd225a
+    );
+
+color: white;
+
+cursor: pointer;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size: 12px;
+
+box-shadow:
+    0 12px 45px rgba(232, 38, 94, 0.25);
+
+transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+}
+
+.main-btn span {
+margin-left: 7px;
+}
+
+.main-btn:hover {
+transform:
+translateY(-3px);
+
+box-shadow:
+    0 16px 55px rgba(232, 38, 94, 0.38);
+
+}
+
+.main-btn:active {
+transform: scale(0.97);
+}
+
+.scroll-hint {
+margin-top: 28px;
+
+color: #6e5961;
+
+font-size: 10px;
+
+letter-spacing: 1px;
+
+}
+
+/* =========================================
+SHARED SECTIONS
+========================================= */
+
+.letter-section,
+.memories,
+.final {
+width: 100%;
+
+max-width: 1100px;
+
+min-height: 100svh;
+
+margin: auto;
+
+padding:
+    120px 25px 90px;
+
+}
+
+.section-label {
+margin-bottom: 28px;
+
+text-align: center;
+
+color: var(--pink-light);
+
+font-size: 10px;
+
+letter-spacing: 4px;
+
+text-transform: uppercase;
+
+}
+
+/* =========================================
+LETTER
+========================================= */
+
+.letter-card {
+position: relative;
+
+width: 100%;
+
+max-width: 760px;
+
+margin: auto;
+
+padding:
+    clamp(30px, 6vw, 60px);
+
+overflow: hidden;
+
+border:
+    1px solid var(--border);
+
+border-radius: 28px;
+
+background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.07),
+        rgba(255,255,255,0.025)
+    );
+
+box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.25);
+
+backdrop-filter:
+    blur(20px);
+
+}
+
+.letter-card::before {
+content: "";
+
+position: absolute;
+
+width: 200px;
+height: 200px;
+
+top: -100px;
+right: -100px;
+
+border-radius: 50%;
+
+background:
+    rgba(255, 60, 110, 0.1);
+
+filter: blur(40px);
+
+}
+
+.envelope-heart {
+position: relative;
+
+text-align: center;
+
+margin-bottom: 15px;
+
+color: var(--pink);
+
+font-size: 40px;
+
+animation:
+    heartbeat 2s infinite;
+
+}
+
+.letter-card h2 {
+position: relative;
+
+margin-bottom: 35px;
+
+text-align: center;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(42px, 7vw, 58px);
+
+font-weight: 500;
+
+}
+
+.letter-card p {
+position: relative;
+
+margin-bottom: 22px;
+
+color: var(--muted);
+
+font-size: 14px;
+
+line-height: 2;
+
+}
+
+.signature {
+margin-top: 40px;
+
+color: var(--white) !important;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size: 23px !important;
+
+line-height: 1.5 !important;
+
+}
+
+.signature span {
+color: var(--pink-light);
+
+font-size: 17px;
+
+}
+
+/* =========================================
+NEXT BUTTON
+========================================= */
+
+.next-btn {
+display: block;
+
+margin:
+    45px auto 0;
+
+padding:
+    13px 25px;
+
+border:
+    1px solid var(--border);
+
+border-radius: 100px;
+
+background:
+    rgba(255,255,255,0.025);
+
+color: var(--pink-light);
+
+cursor: pointer;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size: 12px;
+
+transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+
+}
+
+.next-btn:hover {
+transform:
+translateY(-2px);
+
+background:
+    rgba(255, 65, 115, 0.08);
+
+}
+
+.next-btn span {
+margin-left: 7px;
+}
+
+/* =========================================
+MEMORIES
+========================================= */
+
+.memories {
+text-align: center;
+}
+
+.memories h2 {
+margin-bottom: 14px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(50px, 8vw, 82px);
+
+font-weight: 500;
+
+line-height: 0.9;
+
+}
+
+.section-description {
+max-width: 560px;
+
+margin: auto;
+
+color: var(--muted);
+
+font-size: 13px;
+
+line-height: 1.9;
+
+}
+
+/* =========================================
+PHOTO GALLERY
+========================================= */
+
+.photo-gallery {
+display: grid;
+
+grid-template-columns:
+    repeat(3, 1fr);
+
+gap: 20px;
+
+margin-top: 55px;
+
+}
+
+.photo-card {
+position: relative;
+
+height: 390px;
+
+overflow: hidden;
+
+border:
+    1px solid var(--border);
+
+border-radius: 22px;
+
+background:
+    #13070d;
+
+box-shadow:
+    0 20px 60px rgba(0,0,0,0.18);
+
+}
+
+.photo-card::after {
+content: "";
+
+position: absolute;
+
+inset: 0;
+
+pointer-events: none;
+
+border-radius: inherit;
+
+box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.03);
+
+}
+
+.photo-card img {
+display: block;
+
+width: 100%;
+height: 100%;
+
+object-fit: cover;
+
+transition:
+    transform 0.7s ease,
+    filter 0.7s ease;
+
+}
+
+.photo-card:hover img {
+transform:
+scale(1.07);
+
+filter:
+    brightness(0.8);
+
+}
+
+.photo-overlay {
+position: absolute;
+
+inset: 0;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: flex-end;
+
+padding: 25px;
+
+background:
+    linear-gradient(
+        to bottom,
+        transparent 35%,
+        rgba(0,0,0,0.88)
+    );
+
+opacity: 0;
+
+transition:
+    opacity 0.4s ease;
+
+}
+
+.photo-card:hover .photo-overlay {
+opacity: 1;
+}
+
+.photo-overlay span {
+margin-bottom: 5px;
+
+color: var(--pink);
+
+font-size: 32px;
+
+}
+
+.photo-overlay p {
+color: white;
+
+font-size: 12px;
+
+}
+
+/* =========================================
+MEMORY CARDS
+========================================= */
+
+.memory-grid {
+display: grid;
+
+grid-template-columns:
+    repeat(3, 1fr);
+
+gap: 20px;
+
+margin-top: 35px;
+
+}
+
+.memory-card {
+padding:
+38px 25px;
+
+border:
+    1px solid var(--border);
+
+border-radius: 22px;
+
+background:
+    var(--glass);
+
+transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+
+}
+
+.memory-card:hover {
+transform:
+translateY(-5px);
+
+background:
+    rgba(255,255,255,0.075);
+
+}
+
+.memory-icon {
+margin-bottom: 18px;
+
+font-size: 32px;
+
+}
+
+.memory-card h3 {
+margin-bottom: 12px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size: 30px;
+
+font-weight: 600;
+
+}
+
+.memory-card p {
+color: var(--muted);
+
+font-size: 12px;
+
+line-height: 1.9;
+
+}
+
+/* =========================================
+FINAL
+========================================= */
+
+.final {
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+text-align: center;
+
+}
+
+.final-content {
+width: 100%;
+
+max-width: 760px;
+
+}
+
+.giant-heart {
+color: var(--pink);
+
+font-size:
+    clamp(75px, 13vw, 115px);
+
+line-height: 1;
+
+text-shadow:
+    0 0 35px rgba(255, 57, 109, 0.4);
+
+animation:
+    heartbeat 1.7s infinite;
+
+}
+
+.final h2 {
+margin:
+30px 0;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(55px, 9vw, 105px);
+
+font-weight: 500;
+
+line-height: 0.85;
+
+}
+
+.final h2 span {
+display: block;
+
+color: var(--pink);
+
+font-style: italic;
+
+}
+
+.final-message {
+max-width: 520px;
+
+margin:
+    14px auto;
+
+color: var(--muted);
+
+font-size: 14px;
+
+line-height: 1.9;
+
+}
+
+.forever {
+margin-top: 48px;
+
+color: var(--pink-light);
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size: 25px;
+
+}
+
+.forever span {
+margin: 0 12px;
+
+color: var(--pink);
+
+}
+
+.restart-btn {
+margin-top: 35px;
+
+padding:
+    10px 20px;
+
+border:
+    1px solid rgba(255,255,255,0.1);
+
+border-radius: 100px;
+
+background: transparent;
+
+color: #876f78;
+
+cursor: pointer;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size: 10px;
+
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+footer {
+padding:
+30px 20px;
+
+color: #59464e;
+
+text-align: center;
+
+font-size: 10px;
+
+}
+
+/* =========================================
+FLOATING HEARTS
+========================================= */
+
+.floating-heart {
+position: fixed;
+
+bottom: -40px;
+
+z-index: 20;
+
+color: var(--pink);
+
+pointer-events: none;
+
+animation:
+    floatHeart
+    linear
+    forwards;
+
+text-shadow:
+    0 0 10px rgba(255, 55, 105, 0.35);
+
+}
+
+@keyframes floatHeart {
+
+0% {
+    opacity: 0;
+
+    transform:
+        translateY(0)
+        rotate(0deg)
+        scale(0.7);
+}
+
+10% {
+    opacity: 0.85;
+}
+
+100% {
+    opacity: 0;
+
+    transform:
+        translateY(-115vh)
+        rotate(360deg)
+        scale(1.2);
+}
+
+}
+
+/* =========================================
+ANIMATIONS
+========================================= */
+
+@keyframes heartbeat {
+
+0%,
+100% {
+    transform: scale(1);
+}
+
+15% {
+    transform: scale(1.12);
+}
+
+30% {
+    transform: scale(1);
+}
+
+45% {
+    transform: scale(1.08);
+}
+
+}
+
+@keyframes entrance {
+
+from {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+}
+
+to {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+}
+
+/* =========================================
+TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+.photo-gallery {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
+
+.photo-card:last-child {
+    grid-column:
+        1 / -1;
+
+    width: 50%;
+
+    margin: auto;
+}
+
+.memory-grid {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
+
+}
+
+/* =========================================
+PHONE
+========================================= */
+
+@media (max-width: 600px) {
+
+.lock-screen {
+    padding: 18px;
+}
+
+.lock-screen h1 {
+    font-size: 57px;
+}
+
+.lock-text {
+    font-size: 12px;
+}
+
+.password-box {
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 7px;
+
+    border-radius: 20px;
+}
+
+.password-box input {
+    width: 100%;
+
+    padding:
+        14px;
+
+    text-align: center;
+}
+
+.password-box button {
+    width: 100%;
+
+    padding:
+        14px;
+}
+
+.music-button {
+    top: 12px;
+
+    right: 12px;
+
+    padding:
+        9px 12px;
+}
+
+.music-button span {
+    display: none;
+}
+
+.hero {
+    padding:
+        75px 18px 45px;
+}
+
+.hero h1 {
+    font-size:
+        clamp(
+            51px,
+            17vw,
+            76px
+        );
+
+    letter-spacing:
+        -1px;
+}
+
+.intro-text {
+    font-size: 12px;
+
+    line-height: 1.9;
+}
+
+.main-btn {
+    width: 100%;
+
+    max-width: 290px;
+
+    padding:
+        16px 20px;
+}
+
+.letter-section,
+.memories,
+.final {
+    padding:
+        90px 17px 70px;
+}
+
+.section-label {
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+.letter-card {
+    padding:
+        32px 21px;
+
+    border-radius: 22px;
+}
+
+.letter-card h2 {
+    font-size: 43px;
+
+    margin-bottom: 28px;
+}
+
+.letter-card p {
+    font-size: 12.5px;
+
+    line-height: 1.9;
+}
+
+.signature {
+    font-size: 22px !important;
+}
+
+.signature span {
+    font-size: 15px;
+}
+
+.memories h2 {
+    font-size:
+        clamp(
+            48px,
+            15vw,
+            72px
+        );
+}
+
+.section-description {
+    font-size: 12px;
+}
+
+.photo-gallery {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+
+    margin-top: 40px;
+}
+
+.photo-card {
+    width: 100%;
+
+    height: 370px;
+
+    border-radius: 19px;
+}
+
+.photo-card:last-child {
+    width: 100%;
+}
+
+.photo-overlay {
+    opacity: 1;
+}
+
+.memory-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+}
+
+.memory-card {
+    padding:
+        30px 20px;
+}
+
+.final h2 {
+    font-size:
+        clamp(
+            57px,
+            17vw,
+            85px
+        );
+}
+
+.final-message {
+    font-size: 12px;
+}
+
+.forever {
+    font-size: 22px;
+}
+
+}
+
+/* =========================================
+SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+
+.lock-screen h1 {
+    font-size: 50px;
+}
+
+.hero h1 {
+    font-size: 49px;
+}
+
+.photo-card {
+    height: 310px;
+}
+
+.letter-card {
+    padding:
+        28px 17px;
+}
+
+}
+
+/* =========================================
+REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+*,
+*::before,
+*::after {
+    scroll-behavior: auto !important;
+
+    animation-duration:
+        0.01ms !important;
+
+    animation-iteration-count:
+        1 !important;
+
+    transition-duration:
+        0.01ms !important;
+}
+
+}
+/* =========================================
+LOVE NOTES
+========================================= */
+
+.notes-section {
+width: 100%;
+max-width: 900px;
+min-height: 100svh;
+margin: auto;
+padding: 120px 25px 90px;
+text-align: center;
+}
+
+.notes-section h2 {
+margin-bottom: 15px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(50px, 8vw, 82px);
+
+font-weight: 500;
+
+line-height: 0.9;
+
+
+}
+
+.notes-section h2 em {
+color: var(--pink);
+
+font-style: italic;
+
+
+}
+
+.note-container {
+position: relative;
+
+max-width: 650px;
+
+min-height: 350px;
+
+margin:
+    55px auto 35px;
+
+padding:
+    60px 35px;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: center;
+
+overflow: hidden;
+
+border:
+    1px solid var(--border);
+
+border-radius: 30px;
+
+background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.075),
+        rgba(255,255,255,0.025)
+    );
+
+box-shadow:
+    0 30px 90px rgba(0,0,0,0.25);
+
+backdrop-filter:
+    blur(20px);
+
+
+}
+
+.note-container::before {
+content: "";
+
+position: absolute;
+
+width: 260px;
+height: 260px;
+
+top: -130px;
+right: -130px;
+
+border-radius: 50%;
+
+background:
+    rgba(255, 40, 100, 0.12);
+
+filter: blur(45px);
+
+
+}
+
+.note-number {
+position: absolute;
+
+top: 22px;
+left: 25px;
+
+color: #725762;
+
+font-size: 10px;
+
+letter-spacing: 2px;
+
+
+}
+
+.note-icon {
+position: relative;
+
+margin-bottom: 20px;
+
+color: var(--pink);
+
+font-size: 45px;
+
+text-shadow:
+    0 0 25px rgba(255,60,110,0.35);
+
+
+}
+
+.note-container h3 {
+position: relative;
+
+margin-bottom: 15px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(35px, 6vw, 52px);
+
+font-weight: 500;
+
+
+}
+
+.note-container p {
+position: relative;
+
+max-width: 470px;
+
+color: var(--muted);
+
+font-size: 13px;
+
+line-height: 1.9;
+
+
+}
+
+.note-changing {
+animation:
+noteChange 0.55s ease;
+}
+
+@keyframes noteChange {
+
+0% {
+    opacity: 0;
+    transform:
+        translateY(15px)
+        scale(0.98);
+}
+
+100% {
+    opacity: 1;
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+}
+
+@media (max-width: 600px) {
+
+.notes-section {
+    padding:
+        90px 17px 70px;
+}
+
+.note-container {
+    min-height: 330px;
+
+    margin-top: 40px;
+
+    padding:
+        55px 23px;
+}
+
+.note-container h3 {
+    font-size: 40px;
+}
+
+.note-container p {
+    font-size: 12px;
+}
+
+
+}
+/* =========================================
+LOVE DECLARATION
+========================================= */
+
+.love-declaration {
+position: relative;
+
+margin:
+    32px 0 !important;
+
+color: var(--pink-light) !important;
+
+text-align: center;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(30px, 6vw, 48px) !important;
+
+line-height: 1.05 !important;
+
+font-weight: 500;
+
+font-style: italic;
+
+text-shadow:
+    0 0 25px rgba(255, 65, 115, 0.2);
+
+
+}
+
+.love-declaration.small {
+font-size:
+clamp(24px, 5vw, 34px) !important;
+
+color: var(--white) !important;
+
+
+}
+
+@media (max-width: 600px) {
+
+.love-declaration {
+    margin:
+        28px 0 !important;
+
+    font-size:
+        32px !important;
+}
+
+.love-declaration.small {
+    font-size:
+        26px !important;
+}
+
+
+}
+/* =========================================
+PHONE OPTIMIZATION
+========================================= */
+
+@media (max-width: 600px) {
+
+body {
+    overflow-x: hidden;
+}
+
+.hero,
+.letter-section,
+.memories,
+.notes-section,
+.final {
+    width: 100%;
+    min-height: 100svh;
+}
+
+.hero-content {
+    padding:
+        90px 22px 70px;
+}
+
+.intro-text {
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.letter-card {
+    width: calc(100% - 30px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photo-gallery {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.photo-card {
+    min-height: 400px;
+}
+
+.music-button {
+    right: 14px;
+    bottom: 14px;
+
+    padding:
+        10px 14px;
+
+    font-size: 11px;
+}
+
+.floating-heart {
+    animation-timing-function: ease-out;
+}
+
+.main-btn,
+.next-btn,
+.restart-btn {
+    min-height: 48px;
+}
+
+
+}
+
+/* Reduce motion for people who
+have this accessibility setting enabled */
+
+@media (prefers-reduced-motion: reduce) {
+
+*,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+}
+
+
+}
+/* =========================================
+CAROLS WRLD — MOBILE MUSIC BUTTON
+========================================= */
+
+@media (max-width: 600px) {
+
+.music-button {
+    position: fixed !important;
+
+    right: 16px !important;
+    bottom: 18px !important;
+
+    z-index: 9999 !important;
+
+    width: 48px !important;
+    height: 48px !important;
+
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+
+    border-radius: 50% !important;
+
+    background:
+        rgba(20, 10, 18, 0.82) !important;
+
+    color: #ffffff !important;
+
+    font-size: 18px !important;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(255, 60, 110, 0.12) !important;
+
+    backdrop-filter: blur(14px) !important;
+
+    -webkit-backdrop-filter: blur(14px) !important;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease !important;
+}
+
+
+.music-button span {
+    display: none !important;
+}
+
+
+.music-button:active {
+    transform: scale(0.88) !important;
+}
+
+
+.music-button:hover {
+    transform: scale(1.05) !important;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(255, 60, 110, 0.22) !important;
+}
+
+
+}
+/* =========================================
+CAROLS WRLD — CINEMATIC PHOTO VIEWER
+========================================= */
+
+.photo-card {
+cursor: pointer;
+
+overflow: hidden;
+
+transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
+
+
+}
+
+.photo-card:hover {
+transform: translateY(-7px);
+
+box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(255, 60, 110, 0.12);
+
+
+}
+
+.photo-card img {
+transition:
+transform 0.8s ease,
+filter 0.6s ease;
+}
+
+.photo-card:hover img {
+transform: scale(1.05);
+}
+
+/* =========================================
+FULLSCREEN VIEWER
+========================================= */
+
+.photo-viewer {
+position: fixed;
+
+inset: 0;
+
+z-index: 10000;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+padding: 25px;
+
+background:
+    rgba(5, 3, 7, 0.94);
+
+backdrop-filter:
+    blur(18px);
+
+-webkit-backdrop-filter:
+    blur(18px);
+
+opacity: 0;
+
+visibility: hidden;
+
+transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+
+
+}
+
+.photo-viewer.active {
+opacity: 1;
+
+visibility: visible;
+
+
+}
+
+.photo-viewer img {
+max-width: 94vw;
+max-height: 88vh;
+
+width: auto;
+height: auto;
+
+object-fit: contain;
+
+border-radius: 12px;
+
+box-shadow:
+    0 25px 90px rgba(0, 0, 0, 0.65),
+    0 0 45px rgba(255, 60, 110, 0.12);
+
+transform: scale(0.92);
+
+transition:
+    transform 0.4s ease;
+
+
+}
+
+.photo-viewer.active img {
+transform: scale(1);
+}
+
+/* CLOSE BUTTON */
+
+.photo-viewer-close {
+position: absolute;
+
+top: 20px;
+right: 20px;
+
+width: 45px;
+height: 45px;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+border: 1px solid
+    rgba(255,255,255,0.15);
+
+border-radius: 50%;
+
+background:
+    rgba(255,255,255,0.08);
+
+color: white;
+
+font-size: 25px;
+
+cursor: pointer;
+
+transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+
+
+}
+
+.photo-viewer-close:hover {
+transform: rotate(90deg);
+
+background:
+    rgba(255,60,110,0.25);
+
+
+}
+
+/* PHOTO COUNTER */
+
+.photo-viewer-counter {
+position: absolute;
+
+bottom: 22px;
+left: 50%;
+
+transform:
+    translateX(-50%);
+
+color:
+    rgba(255,255,255,0.65);
+
+font-size: 11px;
+
+letter-spacing: 3px;
+
+
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+.photo-card {
+    transform: none;
+}
+
+.photo-card:hover {
+    transform: none;
+}
+
+.photo-viewer {
+    padding: 12px;
+}
+
+.photo-viewer img {
+    max-width: 96vw;
+    max-height: 82vh;
+
+    border-radius: 8px;
+}
+
+.photo-viewer-close {
+    top: 15px;
+    right: 15px;
+
+    width: 42px;
+    height: 42px;
+}
+
+
+}
+/* =========================================
+CAROLS WRLD — FINAL REVEAL
+========================================= */
+
+.final-reveal {
+position: relative;
+
+min-height: 100svh;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+padding: 100px 22px;
+
+text-align: center;
+
+overflow: hidden;
+
+
+}
+
+.final-reveal::before {
+content: "";
+
+position: absolute;
+
+width: 500px;
+height: 500px;
+
+top: 50%;
+left: 50%;
+
+transform:
+    translate(-50%, -50%);
+
+border-radius: 50%;
+
+background:
+    rgba(255, 40, 100, 0.08);
+
+filter: blur(80px);
+
+pointer-events: none;
+
+
+}
+
+.final-reveal-content {
+position: relative;
+
+z-index: 2;
+
+width: 100%;
+max-width: 700px;
+
+
+}
+
+.final-reveal h2 {
+margin:
+15px 0 20px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(60px, 10vw, 100px);
+
+font-weight: 500;
+
+line-height: 0.85;
+
+
+}
+
+.final-reveal h2 span {
+display: block;
+
+color: var(--pink);
+
+font-style: italic;
+
+
+}
+
+.reveal-intro {
+max-width: 430px;
+
+margin:
+    0 auto 40px;
+
+color: var(--muted);
+
+font-size: 13px;
+
+line-height: 1.8;
+
+
+}
+
+.reveal-button {
+padding:
+15px 27px;
+
+border:
+    1px solid rgba(255,255,255,0.16);
+
+border-radius: 50px;
+
+background:
+    rgba(255,255,255,0.06);
+
+color: white;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size: 12px;
+
+letter-spacing: 0.3px;
+
+cursor: pointer;
+
+backdrop-filter:
+    blur(12px);
+
+transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+
+
+}
+
+.reveal-button span {
+color: var(--pink);
+
+margin-left: 7px;
+
+
+}
+
+.reveal-button:hover {
+transform:
+translateY(-3px);
+
+background:
+    rgba(255,60,110,0.12);
+
+box-shadow:
+    0 10px 35px
+    rgba(255,60,110,0.15);
+
+
+}
+
+.reveal-button:active {
+transform:
+scale(0.94);
+}
+
+/* =========================================
+SECRET MESSAGE
+========================================= */
+
+.secret-message {
+display: none;
+
+margin-top: 55px;
+
+opacity: 0;
+
+transform:
+    translateY(30px)
+    scale(0.97);
+
+
+}
+
+.secret-message.show {
+display: block;
+
+animation:
+    revealMessage
+    1.2s
+    cubic-bezier(.2,.8,.2,1)
+    forwards;
+
+
+}
+
+@keyframes revealMessage {
+
+to {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+}
+
+.reveal-heart {
+color:
+var(--pink);
+
+font-size:
+    48px;
+
+margin-bottom:
+    18px;
+
+animation:
+    heartbeat
+    1.5s
+    ease-in-out
+    infinite;
+
+
+}
+
+@keyframes heartbeat {
+
+0%,
+100% {
+    transform: scale(1);
+}
+
+50% {
+    transform: scale(1.15);
+}
+
+
+}
+
+.secret-message h3 {
+margin: 0;
+
+color: white;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(52px, 10vw, 90px);
+
+font-weight: 500;
+
+line-height: 0.9;
+
+letter-spacing:
+    1px;
+
+
+}
+
+.secret-message h4 {
+margin:
+12px 0 28px;
+
+color:
+    var(--pink);
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(27px, 5vw, 43px);
+
+font-style:
+    italic;
+
+font-weight:
+    400;
+
+
+}
+
+.secret-message p {
+max-width:
+520px;
+
+margin:
+    0 auto 18px;
+
+color:
+    var(--muted);
+
+font-size:
+    13px;
+
+line-height:
+    1.9;
+
+
+}
+
+.final-signature {
+margin-top:
+35px;
+
+color:
+    rgba(255,255,255,0.65);
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    22px;
+
+font-style:
+    italic;
+
+line-height:
+    1.5;
+
+
+}
+
+.final-signature span {
+color:
+var(--pink);
+
+font-size:
+    28px;
+
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+.final-reveal {
+    min-height:
+        100svh;
+
+    padding:
+        80px 20px;
+}
+
+.final-reveal h2 {
+    font-size:
+        62px;
+}
+
+.reveal-intro {
+    font-size:
+        12px;
+}
+
+.reveal-button {
+    padding:
+        14px 23px;
+}
+
+.secret-message {
+    margin-top:
+        45px;
+}
+
+.secret-message h3 {
+    font-size:
+        55px;
+}
+
+.secret-message h4 {
+    font-size:
+        29px;
+}
+
+.secret-message p {
+    font-size:
+        12px;
+}
+
+
+}
+/* =========================================
+CAROLS WRLD — PERFECT MOBILE LETTER
+========================================= */
+
+@media (max-width: 600px) {
+
+.letter-section {
+    width: 100% !important;
+
+    min-height: 100svh !important;
+
+    padding:
+        80px 14px 70px !important;
+
+    margin: 0 !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    text-align: center !important;
+
+    box-sizing: border-box !important;
+}
+
+
+.letter-section .section-label {
+    width: 100% !important;
+
+    margin:
+        0 auto 20px !important;
+
+    text-align: center !important;
+}
+
+
+.letter-card {
+    position: relative !important;
+
+    width: calc(100% - 20px) !important;
+
+    max-width: 430px !important;
+
+    margin:
+        0 auto 30px !important;
+
+    padding:
+        45px 22px !important;
+
+    box-sizing: border-box !important;
+
+    text-align: center !important;
+}
+
+
+.letter-card h2 {
+    width: 100% !important;
+
+    margin:
+        0 auto 25px !important;
+
+    text-align: center !important;
+}
+
+
+.letter-card p {
+    width: 100% !important;
+
+    max-width: 340px !important;
+
+    margin:
+        0 auto 20px !important;
+
+    text-align: center !important;
+
+    line-height: 1.8 !important;
+}
+
+
+.letter-card .love-declaration {
+    width: 100% !important;
+
+    margin:
+        30px auto !important;
+
+    text-align: center !important;
+}
+
+
+.letter-card .signature {
+    width: 100% !important;
+
+    margin:
+        30px auto 0 !important;
+
+    text-align: center !important;
+}
+
+
+.letter-card .envelope-heart {
+    margin:
+        0 auto 20px !important;
+
+    text-align: center !important;
+}
+
+
+.letter-section .next-btn {
+    margin:
+        0 auto !important;
+
+    align-self: center !important;
+}
+
+
+}
+/* =========================================
+CAROLS WRLD — CINEMATIC PHOTO SECTION
+========================================= */
+
+.photo-gallery {
+width: min(92%, 950px) !important;
+
+margin: 45px auto 35px !important;
+
+display: grid !important;
+
+grid-template-columns:
+    repeat(3, 1fr);
+
+gap: 22px;
+
+justify-content: center;
+
+align-items: start;
+
+
+}
+
+/* PHOTO CARD */
+
+.photo-card {
+position: relative;
+
+width: 100%;
+
+aspect-ratio: 4 / 5;
+
+overflow: hidden;
+
+margin: 0 auto;
+
+border-radius: 18px;
+
+background: #120b10;
+
+border:
+    1px solid
+    rgba(255,255,255,0.10);
+
+box-shadow:
+    0 18px 50px
+    rgba(0,0,0,0.28);
+
+cursor: pointer;
+
+opacity: 0;
+
+transform:
+    translateY(35px);
+
+animation:
+    photoAppear 0.9s ease forwards;
+
+
+}
+
+.photo-card:nth-child(1) {
+animation-delay: 0.1s;
+}
+
+.photo-card:nth-child(2) {
+animation-delay: 0.25s;
+}
+
+.photo-card:nth-child(3) {
+animation-delay: 0.4s;
+}
+
+@keyframes photoAppear {
+
+to {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+}
+
+/* IMAGE */
+
+.photo-card img {
+width: 100% !important;
+
+height: 100% !important;
+
+display: block;
+
+object-fit: cover;
+
+transition:
+    transform 0.8s ease,
+    filter 0.8s ease;
+
+
+}
+
+.photo-card:hover img {
+transform:
+scale(1.07);
+
+filter:
+    brightness(0.82);
+
+
+}
+
+/* DARK GRADIENT */
+
+.photo-card::after {
+content: "";
+
+position: absolute;
+
+inset: 0;
+
+background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.60),
+        transparent 55%
+    );
+
+pointer-events: none;
+
+
+}
+
+/* PHOTO OVERLAY */
+
+.photo-overlay {
+position: absolute;
+
+left: 0;
+right: 0;
+bottom: 0;
+
+z-index: 2;
+
+padding: 25px 18px 20px;
+
+text-align: center;
+
+transform:
+    translateY(5px);
+
+transition:
+    transform 0.4s ease;
+
+
+}
+
+.photo-overlay span {
+display: block;
+
+margin-bottom: 7px;
+
+color:
+    var(--pink);
+
+font-size: 20px;
+
+
+}
+
+.photo-overlay p {
+margin: 0;
+
+color:
+    rgba(255,255,255,0.88);
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size: 19px;
+
+font-style: italic;
+
+
+}
+
+.photo-card:hover
+.photo-overlay {
+transform:
+translateY(0);
+}
+
+/* =========================================
+PHONE
+========================================= */
+
+@media (max-width: 700px) {
+
+.photo-gallery {
+    width: 92% !important;
+
+    margin:
+        40px auto 30px !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: center !important;
+
+    gap: 28px;
+}
+
+
+.photo-card {
+    width: 100% !important;
+
+    max-width: 380px !important;
+
+    aspect-ratio: 4 / 5;
+
+    border-radius: 20px;
+}
+
+
+.photo-card img {
+    object-fit: cover !important;
+}
+
+
+.photo-overlay {
+    padding:
+        30px 18px 22px;
+}
+
+
+.photo-overlay p {
+    font-size: 21px;
+}
+
+
+}
+
+/* =========================================
+SMALL PHONES
+========================================= */
+
+@media (max-width: 400px) {
+
+.photo-gallery {
+    width: 94% !important;
+}
+
+
+.photo-card {
+    max-width: 350px !important;
+
+    border-radius: 17px;
+}
+
+
+.photo-overlay p {
+    font-size: 18px;
+}
+
+
+}
+/* =========================================
+CAROLS WRLD — CINEMATIC OPENING
+========================================= */
+
+#lockScreen {
+position: fixed !important;
+
+inset: 0 !important;
+
+z-index: 99999 !important;
+
+display: flex !important;
+
+align-items: center !important;
+
+justify-content: center !important;
+
+padding: 25px !important;
+
+box-sizing: border-box !important;
+
+background:
+    radial-gradient(
+        circle at 50% 45%,
+        rgba(255, 45, 105, 0.12),
+        transparent 38%
+    ),
+    #080508 !important;
+
+text-align: center !important;
+
+overflow: hidden !important;
+
+
+}
+
+/* Soft glow */
+
+#lockScreen::before {
+content: "";
+
+position: absolute;
+
+width: 420px;
+height: 420px;
+
+left: 50%;
+top: 50%;
+
+transform:
+    translate(-50%, -50%);
+
+border-radius: 50%;
+
+background:
+    rgba(255, 45, 105, 0.08);
+
+filter:
+    blur(80px);
+
+pointer-events: none;
+
+
+}
+
+/* Content */
+
+#lockScreen > * {
+position: relative;
+
+z-index: 2;
+
+
+}
+
+#lockScreen .lock-content {
+width: min(90%, 520px);
+
+margin: auto;
+
+animation:
+    openingAppear
+    1.2s
+    ease
+    both;
+
+
+}
+
+@keyframes openingAppear {
+
+from {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+}
+
+to {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+}
+
+/* Title */
+
+#lockScreen h1 {
+margin:
+0 0 10px;
+
+color: white;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(55px, 11vw, 95px);
+
+font-weight:
+    500;
+
+line-height:
+    0.9;
+
+letter-spacing:
+    -1px;
+
+
+}
+
+#lockScreen h1 span {
+display: block;
+
+color:
+    var(--pink);
+
+font-style:
+    italic;
+
+
+}
+
+/* Subtitle */
+
+#lockScreen p {
+margin:
+0 auto 32px;
+
+max-width:
+    330px;
+
+color:
+    rgba(255,255,255,0.55);
+
+font-size:
+    12px;
+
+line-height:
+    1.8;
+
+letter-spacing:
+    0.5px;
+
+
+}
+
+/* Password input */
+
+#passwordInput {
+width:
+min(100%, 310px);
+
+height:
+    50px;
+
+padding:
+    0 20px;
+
+box-sizing:
+    border-box;
+
+border:
+    1px solid
+    rgba(255,255,255,0.12);
+
+border-radius:
+    50px;
+
+outline:
+    none;
+
+background:
+    rgba(255,255,255,0.055);
+
+color:
+    white;
+
+text-align:
+    center;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size:
+    13px;
+
+backdrop-filter:
+    blur(12px);
+
+transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+
+}
+
+#passwordInput::placeholder {
+color:
+rgba(255,255,255,0.35);
+}
+
+#passwordInput:focus {
+border-color:
+rgba(255,60,110,0.55);
+
+box-shadow:
+    0 0 25px
+    rgba(255,60,110,0.10);
+
+
+}
+
+/* Unlock button */
+
+#unlockButton {
+display:
+block;
+
+width:
+    min(100%, 310px);
+
+height:
+    50px;
+
+margin:
+    14px auto 0;
+
+border:
+    1px solid
+    rgba(255,255,255,0.12);
+
+border-radius:
+    50px;
+
+background:
+    linear-gradient(
+        135deg,
+        rgba(255,55,110,0.85),
+        rgba(180,35,80,0.85)
+    );
+
+color:
+    white;
+
+font-family:
+    "Poppins",
+    sans-serif;
+
+font-size:
+    12px;
+
+cursor:
+    pointer;
+
+box-shadow:
+    0 12px 35px
+    rgba(255,40,100,0.18);
+
+transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+
+}
+
+#unlockButton:hover {
+transform:
+translateY(-2px);
+
+box-shadow:
+    0 16px 45px
+    rgba(255,40,100,0.28);
+
+
+}
+
+#unlockButton:active {
+transform:
+scale(0.96);
+}
+
+/* Error */
+
+#errorMessage {
+margin-top:
+14px !important;
+
+color:
+    #ff7297 !important;
+
+font-size:
+    11px !important;
+
+opacity:
+    0;
+
+transition:
+    opacity 0.25s ease;
+
+
+}
+
+#errorMessage.show {
+opacity:
+1;
+}
+
+/* Unlock animation */
+
+#lockScreen.unlocking {
+animation:
+unlockFade
+0.8s
+ease
+forwards;
+}
+
+@keyframes unlockFade {
+
+to {
+    opacity: 0;
+
+    transform:
+        scale(1.03);
+
+    pointer-events:
+        none;
+}
+
+
+}
+
+/* =========================================
+PHONE
+========================================= */
+
+@media (max-width: 600px) {
+
+#lockScreen {
+    padding:
+        20px;
+}
+
+
+#lockScreen h1 {
+    font-size:
+        58px;
+}
+
+
+#lockScreen p {
+    max-width:
+        290px;
+
+    font-size:
+        11px;
+}
+
+
+#passwordInput,
+#unlockButton {
+    width:
+        min(100%, 300px);
+}
+
+
+}
+
+/* =========================================
+VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+
+#lockScreen h1 {
+    font-size:
+        50px;
+}
+
+
+#lockScreen p {
+    margin-bottom:
+        25px;
+}
+
+
+}
+/* =========================================
+CAROLS WRLD — OPENING TRANSITION
+========================================= */
+
+.opening-transition {
+position: fixed;
+
+inset: 0;
+
+z-index: 100000;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+background:
+    #080508;
+
+opacity: 0;
+
+visibility: hidden;
+
+pointer-events: none;
+
+transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+
+
+}
+
+.opening-transition.show {
+opacity: 1;
+
+visibility: visible;
+
+
+}
+
+.opening-transition-content {
+text-align: center;
+
+transform:
+    translateY(15px);
+
+opacity: 0;
+
+transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+
+
+}
+
+.opening-transition.show
+.opening-transition-content {
+opacity: 1;
+
+transform:
+    translateY(0);
+
+
+}
+
+.transition-heart {
+color:
+var(--pink);
+
+font-size:
+    65px;
+
+line-height:
+    1;
+
+margin-bottom:
+    22px;
+
+animation:
+    transitionHeartbeat
+    1.3s
+    ease-in-out
+    infinite;
+
+text-shadow:
+    0 0 35px
+    rgba(255,60,110,0.45);
+
+
+}
+
+@keyframes transitionHeartbeat {
+
+0%,
+100% {
+    transform:
+        scale(1);
+}
+
+50% {
+    transform:
+        scale(1.18);
+}
+
+
+}
+
+.opening-transition p {
+margin:
+0 0 7px;
+
+color:
+    white;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(38px, 8vw, 60px);
+
+font-style:
+    italic;
+
+
+}
+
+.opening-transition span {
+color:
+rgba(255,255,255,0.45);
+
+font-size:
+    10px;
+
+letter-spacing:
+    3px;
+
+text-transform:
+    uppercase;
+
+
+}
+
+/* PHONE */
+
+@media (max-width: 600px) {
+
+.transition-heart {
+    font-size:
+        58px;
+}
+
+.opening-transition p {
+    font-size:
+        42px;
+}
+
+
+}
+/* =========================================================
+CAROLS WRLD — FINAL MOBILE POLISH
+ADD THIS AT THE VERY BOTTOM OF style.css
+========================================================= */
+
+@media (max-width: 600px) {
+
+/* Keep everything centered on phones */
+
+.hero,
+.letter-section,
+.memories,
+.notes-section,
+.final,
+.final-reveal {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
+
+
+/* LETTER — properly centered */
+
+.letter-card {
+    width: 94%;
+    max-width: 430px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 42px 22px;
+    text-align: center;
+}
+
+
+.letter-card h2,
+.letter-card p,
+.letter-card .signature {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.letter-card p {
+    line-height: 1.85;
+}
+
+
+.love-declaration {
+    text-align: center !important;
+}
+
+
+/* BUTTONS */
+
+.main-btn,
+.next-btn,
+.restart-btn,
+.reveal-button {
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* PHOTOS */
+
+.photo-gallery {
+    width: 94%;
+    max-width: 430px;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.photo-card {
+    width: 100%;
+    max-width: 390px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* FULLSCREEN PHOTO */
+
+.photo-viewer {
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.photo-viewer img {
+    width: auto;
+    max-width: 96vw;
+    max-height: 84vh;
+    object-fit: contain;
+    margin: auto;
+}
+
+
+/* LOVE NOTES */
+
+.note-container {
+    width: 94%;
+    max-width: 430px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.note-container h3,
+.note-container p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* FINAL MESSAGE */
+
+.final-content,
+.final-reveal-content {
+    width: 94%;
+    max-width: 430px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.final-message,
+.reveal-intro,
+.secret-message p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+/* SECRET LOVE MESSAGE */
+
+.secret-message {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.final-signature {
+    text-align: center;
+}
+
+
+/* MUSIC BUTTON */
+
+.music-button {
+    right: 14px;
+    bottom: 16px;
+    z-index: 9999;
+}
+
+
+/* OPENING TRANSITION */
+
+.opening-transition-content {
+    width: 90%;
+    text-align: center;
+}
+
+
+.opening-transition-content p,
+.opening-transition-content span {
+    text-align: center;
+}
+
+
+}
+/* =========================================================
+CAROLS WRLD — PHOTO POLISH
+ADD TO THE VERY BOTTOM OF style.css
+========================================================= */
+
+/* Make photos feel more cinematic */
+
+.photo-card {
+position: relative;
+overflow: hidden;
+background: #10080d;
+cursor: pointer;
+transition:
+transform 0.45s ease,
+box-shadow 0.45s ease;
+}
+
+.photo-card img {
+display: block;
+width: 100%;
+height: 100%;
+object-fit: cover;
+
+transition:
+    transform 0.7s cubic-bezier(.2,.8,.2,1),
+    filter 0.7s ease;
+
+
+}
+
+/* Dark romantic gradient over image */
+
+.photo-card::after {
+content: "";
+position: absolute;
+inset: 0;
+
+background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.72) 0%,
+        rgba(0,0,0,0.10) 55%,
+        rgba(0,0,0,0.02) 100%
+    );
+
+pointer-events: none;
+
+
+}
+
+/* Hover on laptop */
+
+@media (min-width: 601px) {
+
+.photo-card:hover {
+    transform: translateY(-8px) scale(1.015);
+
+    box-shadow:
+        0 25px 65px rgba(0,0,0,0.45),
+        0 0 30px rgba(255,65,115,0.08);
+}
+
+.photo-card:hover img {
+    transform: scale(1.08);
+    filter: brightness(0.82);
+}
+
+
+}
+
+/* Touch feedback on phones */
+
+@media (max-width: 600px) {
+
+.photo-card:active {
+    transform: scale(0.985);
+}
+
+.photo-card:active img {
+    transform: scale(1.025);
+}
+
+
+}
+
+/* Photo caption */
+
+.photo-overlay {
+z-index: 3;
+}
+
+.photo-overlay span {
+text-shadow:
+0 0 18px rgba(255,70,120,0.55);
+}
+
+/* Make fullscreen image beautiful */
+
+.photo-viewer img {
+box-shadow:
+0 25px 90px rgba(0,0,0,0.75),
+0 0 35px rgba(255,60,110,0.08);
+}
+
+/* Prevent accidental horizontal scrolling */
+
+html,
+body {
+max-width: 100%;
+overflow-x: hidden;
+}
+
+/* Better tap behavior */
+
+.photo-card,
+.next-btn,
+.main-btn,
+.reveal-button,
+.restart-btn,
+.music-button {
+-webkit-tap-highlight-color: transparent;
+touch-action: manipulation;
+}
+/* =========================================================
+CAROLS WRLD — FINAL SURPRISE
+ADD TO THE VERY BOTTOM OF style.css
+========================================================= */
+
+.final-surprise {
+position: fixed;
+inset: 0;
+z-index: 99998;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 25px;
+
+background:
+    radial-gradient(
+        circle at center,
+        rgba(255,55,110,0.18),
+        transparent 35%
+    ),
+    rgba(6,3,7,0.98);
+
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
+
+transition:
+    opacity 1.2s ease,
+    visibility 1.2s ease;
+
+
+}
+
+.final-surprise.show {
+opacity: 1;
+visibility: visible;
+pointer-events: auto;
+}
+
+.final-surprise-content {
+width: min(92%, 650px);
+text-align: center;
+
+transform: translateY(25px) scale(0.96);
+
+transition:
+    transform 1.2s cubic-bezier(.2,.8,.2,1);
+
+
+}
+
+.final-surprise.show
+.final-surprise-content {
+transform: translateY(0) scale(1);
+}
+
+.final-surprise-heart {
+margin-bottom: 25px;
+
+color: #ff4f83;
+
+font-size: 70px;
+
+animation:
+    finalHeartBeat 1.7s ease-in-out infinite;
+
+text-shadow:
+    0 0 25px rgba(255,60,110,0.35),
+    0 0 70px rgba(255,60,110,0.15);
+
+
+}
+
+.final-surprise-label {
+margin-bottom: 15px;
+
+color: #ff9ab8;
+
+font-size: 10px;
+font-weight: 500;
+
+letter-spacing: 4px;
+
+text-transform: uppercase;
+
+
+}
+
+.final-surprise h2 {
+margin-bottom: 25px;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(48px, 10vw, 85px);
+
+font-weight: 500;
+
+line-height: 0.9;
+
+
+}
+
+.final-surprise h2 span {
+display: block;
+
+color: #ff4f83;
+
+font-style: italic;
+
+
+}
+
+.final-surprise-text {
+max-width: 480px;
+
+margin: 0 auto 22px;
+
+color:
+    rgba(255,255,255,0.65);
+
+font-size: 13px;
+
+line-height: 1.9;
+
+
+}
+
+.final-surprise-love {
+margin-top: 30px;
+
+color: white;
+
+font-family:
+    "Cormorant Garamond",
+    serif;
+
+font-size:
+    clamp(30px, 6vw, 48px);
+
+font-style: italic;
+
+
+}
+
+.final-surprise-love span {
+color: #ff4f83;
+}
+
+.final-surprise-close {
+margin-top: 35px;
+
+padding: 13px 24px;
+
+border:
+    1px solid
+    rgba(255,255,255,0.14);
+
+border-radius: 50px;
+
+background:
+    rgba(255,255,255,0.05);
+
+color:
+    rgba(255,255,255,0.65);
+
+font-size: 10px;
+
+cursor: pointer;
+
+transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+
+
+}
+
+.final-surprise-close:hover {
+transform: translateY(-2px);
+
+background:
+    rgba(255,60,110,0.10);
+
+
+}
+
+@keyframes finalHeartBeat {
+
+0%,
+100% {
+    transform: scale(1);
+}
+
+50% {
+    transform: scale(1.16);
+}
+
+
+}
+
+@media (max-width: 600px) {
+
+.final-surprise {
+    padding: 20px;
+}
+
+.final-surprise-heart {
+    font-size: 58px;
+}
+
+.final-surprise-text {
+    max-width: 340px;
+    font-size: 12px;
+}
+
+.final-surprise-love {
+    font-size: 32px;
+}
+
+
+}
+/* =========================================================
+CAROLS WRLD — LOVE NOTES PHONE FIX
+ADD TO THE VERY BOTTOM OF style.css
+========================================================= */
+
+@media (max-width: 600px) {
+
+/* Keep the whole Love Notes section centered */
+
+.notes-section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* Center the heading and description */
+
+.notes-section h2,
+.notes-section .section-description,
+.notes-section .section-label {
+    width: 100%;
+    max-width: 380px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+}
+
+
+/* The actual "Things I love about you" box */
+
+.note-container {
+    position: relative;
+
+    width: 100% !important;
+    max-width: 390px !important;
+
+    box-sizing: border-box;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    left: auto !important;
+    right: auto !important;
+
+    transform: none !important;
+
+    align-self: center;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+/* Keep everything inside the box */
+
+.note-container h3,
+.note-container p,
+.note-container .note-icon,
+.note-container .note-number {
+    max-width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+.note-container p {
+    padding-left: 8px;
+    padding-right: 8px;
+
+    line-height: 1.8;
+
+    overflow-wrap: break-word;
+}
+
+
+/* Another one button stays centered */
+
+.notes-section .next-btn {
+    align-self: center;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    max-width: 90%;
+}
+
+
+}
+
+/* Extra-small phones */
+
+@media (max-width: 380px) {
+
+.notes-section {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+.note-container {
+    max-width: 350px !important;
+}
+
+.note-container p {
+    font-size: 13px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+}
+/* =========================================================
+   FINAL MOBILE FIX — LOVE NOTES CENTERING
+   PASTE THIS ENTIRE BLOCK AT THE VERY BOTTOM
+   ========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    /* -----------------------------------------------------
+       LOVE NOTES SECTION
+       ----------------------------------------------------- */
+
+    .notes-section {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        box-sizing: border-box !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+
+        text-align: center !important;
+
+        overflow: hidden !important;
+    }
+
+
+    /* -----------------------------------------------------
+       LOVE NOTES HEADING
+       ----------------------------------------------------- */
+
+    .notes-section .section-label {
+        width: 100% !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        text-align: center !important;
+    }
+
+    .notes-section h2 {
+        width: 100% !important;
+        max-width: 390px !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        text-align: center !important;
+    }
+
+    .notes-section .section-description {
+        width: 100% !important;
+        max-width: 350px !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        text-align: center !important;
+    }
+
+
+    /* -----------------------------------------------------
+       THE "THINGS I LOVE ABOUT YOU" BOX
+       ----------------------------------------------------- */
+
+    .note-container {
+        position: relative !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        width: calc(100% - 4px) !important;
+        max-width: 390px !important;
+
+        min-height: 330px !important;
+
+        margin: 40px auto 35px !important;
+
+        padding: 55px 20px !important;
+
+        box-sizing: border-box !important;
+
+        left: auto !important;
+        right: auto !important;
+
+        transform: none !important;
+
+        text-align: center !important;
+
+        overflow: hidden !important;
+    }
+
+
+    /* -----------------------------------------------------
+       KEEP EVERYTHING INSIDE THE BOX CENTERED
+       ----------------------------------------------------- */
+
+    .note-container .note-number {
+        position: absolute !important;
+
+        top: 22px !important;
+        left: 50% !important;
+
+        transform: translateX(-50%) !important;
+
+        width: max-content !important;
+
+        margin: 0 !important;
+
+        text-align: center !important;
+    }
+
+
+    .note-container .note-icon {
+        position: relative !important;
+
+        width: 100% !important;
+
+        margin: 0 auto 20px !important;
+
+        text-align: center !important;
+
+        flex-shrink: 0 !important;
+    }
+
+
+    .note-container h3 {
+        position: relative !important;
+
+        width: 100% !important;
+        max-width: 330px !important;
+
+        margin: 0 auto 15px !important;
+
+        padding: 0 !important;
+
+        text-align: center !important;
+
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+    }
+
+
+    .note-container p {
+        position: relative !important;
+
+        width: 100% !important;
+        max-width: 320px !important;
+
+        margin: 0 auto !important;
+
+        padding: 0 5px !important;
+
+        box-sizing: border-box !important;
+
+        text-align: center !important;
+
+        line-height: 1.85 !important;
+
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+    }
+
+
+    /* -----------------------------------------------------
+       "ANOTHER ONE" BUTTON
+       ----------------------------------------------------- */
+
+    .notes-section .next-btn {
+        display: block !important;
+
+        width: auto !important;
+        max-width: 90% !important;
+
+        margin: 0 auto !important;
+
+        align-self: center !important;
+
+        text-align: center !important;
+    }
+
+
+    /* -----------------------------------------------------
+       PREVENT ANY CHILD FROM PUSHING THE BOX SIDEWAYS
+       ----------------------------------------------------- */
+
+    .notes-section *,
+    .note-container * {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+   ========================================================= */
+
+@media screen and (max-width: 380px) {
+
+    .notes-section {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .note-container {
+        width: calc(100% - 2px) !important;
+
+        min-height: 320px !important;
+
+        padding-left: 17px !important;
+        padding-right: 17px !important;
+    }
+
+    .note-container h3 {
+        max-width: 300px !important;
+        font-size: 37px !important;
+    }
+
+    .note-container p {
+        max-width: 290px !important;
+        font-size: 12px !important;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media screen and (max-width: 340px) {
+
+    .note-container {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+    .note-container h3 {
+        font-size: 34px !important;
+    }
+
+    .note-container p {
+        font-size: 11.5px !important;
+    }
+
+}

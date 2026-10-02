@@ -1,0 +1,720 @@
+<!DOCTYPE html> <html lang="en"> <head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#080508"
+>
+
+<title>Carols Wrld ❤️</title>
+
+
+<!-- Google Fonts -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+>
+
+
+<!-- Main CSS -->
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+</head> <body> <!-- ================================================= LOCK SCREEN ================================================= --> <div class="lock-screen" id="lockScreen" >
+<div class="lock-content">
+
+
+    <div class="lock-heart">
+        ♥
+    </div>
+
+
+    <p class="eyebrow">
+        A little world made for you
+    </p>
+
+
+    <h1>
+        Carols
+        <span>Wrld.</span>
+    </h1>
+
+
+    <p class="lock-text">
+        Welcome, Carol.
+        <br>
+        There's something waiting for you inside.
+    </p>
+
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter the secret..."
+            autocomplete="off"
+            aria-label="Secret code"
+        >
+
+
+        <button
+            id="unlockButton"
+            type="button"
+        >
+            Enter ♥
+        </button>
+
+    </div>
+
+
+    <p
+        class="error-message"
+        id="errorMessage"
+    >
+        Not quite... try again ❤️
+    </p>
+
+
+    <p class="hint">
+        Hint: Aikens + Wrld
+    </p>
+
+</div>
+
+</div> <!-- ================================================= OPENING TRANSITION ================================================= --> <div class="opening-transition" id="openingTransition" aria-hidden="true" >
+<div class="opening-transition-content">
+
+    <div class="transition-heart">
+        ♥
+    </div>
+
+    <p>
+        For Carol
+    </p>
+
+    <span>
+        with all my heart
+    </span>
+
+</div>
+
+</div> <!-- ================================================= WEBSITE ================================================= --> <main class="website hidden" id="website" >
+<!-- BACKGROUND -->
+
+<div class="stars"></div>
+
+
+<!-- =================================================
+     MUSIC PLAYER
+================================================= -->
+
+<audio
+    id="backgroundMusic"
+    controls
+    loop
+    preload="auto"
+>
+    <source src="her love.mpeg" type="audio/mpeg">
+    Your browser cannot play this audio file.
+</audio>
+
+
+<!-- =================================================
+     HERO
+================================================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="tiny-heart">
+            ♥
+        </div>
+
+
+        <p class="eyebrow">
+            CAROLS WRLD
+        </p>
+
+
+        <h1>
+            Welcome,
+            <span>Carol.</span>
+        </h1>
+
+
+        <p class="intro-text">
+            I wanted to create a little place
+            that belongs to you.
+            A place filled with words,
+            memories and a few things
+            I don't always know how to say.
+        </p>
+
+
+        <button
+            class="main-btn"
+            id="startButton"
+            type="button"
+        >
+            There's something I want to say
+            <span>↓</span>
+        </button>
+
+
+        <p class="scroll-hint">
+            keep scrolling...
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     LETTER
+================================================= -->
+
+<section
+    class="letter-section"
+    id="letter"
+>
+
+    <p class="section-label">
+        A little letter
+    </p>
+
+
+    <div class="letter-card">
+
+        <div class="envelope-heart">
+            ♥
+        </div>
+
+
+        <h2>
+            Dear Carol,
+        </h2>
+
+
+        <p>
+            I don't know if words can really explain
+            what you mean to me. But there is one thing
+            I never want you to doubt.
+        </p>
+
+
+        <p class="love-declaration">
+            I LOVE YOU.
+            <br>
+            NOW AND FOREVER.
+        </p>
+
+
+        <p>
+            You are the one I want beside me through
+            the beautiful moments, the difficult moments,
+            the silly moments and all the little moments
+            in between.
+        </p>
+
+
+        <p>
+            You are my person.
+            The one I choose, the one I cherish,
+            and the one I want to keep making memories
+            with.
+        </p>
+
+
+        <p>
+            I don't need a perfect world.
+            I just want a world where I get to have you
+            in it.
+        </p>
+
+
+        <p class="love-declaration small">
+            You are mine, my only one. ♥
+        </p>
+
+
+        <p>
+            Whatever comes next, I want you to know
+            that my heart has chosen you.
+        </p>
+
+
+        <p class="signature">
+            Forever yours,
+            <br>
+
+            <span>
+                With all my heart, always. ♥
+            </span>
+        </p>
+
+    </div>
+
+
+    <button
+        class="next-btn"
+        data-target="memories"
+        type="button"
+    >
+        Now look at this
+        <span>↓</span>
+    </button>
+
+</section>
+
+
+
+<!-- =================================================
+     MEMORIES / PHOTOS
+================================================= -->
+
+<section
+    class="memories"
+    id="memories"
+>
+
+    <p class="section-label">
+        Little memories
+    </p>
+
+
+    <h2>
+        Moments
+        <br>
+        <em>worth keeping.</em>
+    </h2>
+
+
+    <p class="section-description">
+        Some moments deserve their own little
+        corner of the world.
+    </p>
+
+
+    <div class="photo-gallery">
+
+
+        <!-- PHOTO 1 -->
+
+        <div
+            class="photo-card"
+            tabindex="0"
+            role="button"
+            aria-label="Open first photo"
+        >
+
+            <img
+                src="images/photo1.jpg"
+                alt="A memory of Carol"
+                loading="lazy"
+            >
+
+
+            <div class="photo-overlay">
+
+                <span>
+                    ♥
+                </span>
+
+                <p>
+                    A moment worth remembering.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PHOTO 2 -->
+
+        <div
+            class="photo-card"
+            tabindex="0"
+            role="button"
+            aria-label="Open second photo"
+        >
+
+            <img
+                src="images/photo2.jpg"
+                alt="A special memory"
+                loading="lazy"
+            >
+
+
+            <div class="photo-overlay">
+
+                <span>
+                    ♥
+                </span>
+
+                <p>
+                    One of those little moments.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PHOTO 3 -->
+
+        <div
+            class="photo-card"
+            tabindex="0"
+            role="button"
+            aria-label="Open third photo"
+        >
+
+            <img
+                src="images/photo3.jpg"
+                alt="A beautiful memory"
+                loading="lazy"
+            >
+
+
+            <div class="photo-overlay">
+
+                <span>
+                    ♥
+                </span>
+
+                <p>
+                    And another one to keep.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="next-btn"
+        data-target="notes"
+        type="button"
+    >
+        There's more
+        <span>♥</span>
+    </button>
+
+</section>
+
+
+
+<!-- =================================================
+     LOVE NOTES
+================================================= -->
+
+<section
+    class="notes-section"
+    id="notes"
+>
+
+    <p class="section-label">
+        Little things
+    </p>
+
+
+    <h2>
+        Things I love
+        <br>
+        <em>about you.</em>
+    </h2>
+
+
+    <p class="section-description">
+        Tap the button.
+        One little thought at a time.
+    </p>
+
+
+    <div
+        class="note-container"
+        id="noteContainer"
+    >
+
+        <div
+            class="note-number"
+            id="noteNumber"
+        >
+            01
+        </div>
+
+
+        <div
+            class="note-icon"
+            id="noteIcon"
+        >
+            ♥
+        </div>
+
+
+        <h3 id="noteTitle">
+            Your smile
+        </h3>
+
+
+        <p id="noteText">
+            Somehow it makes ordinary days
+            feel a little less ordinary.
+        </p>
+
+    </div>
+
+
+    <button
+        class="next-btn"
+        id="anotherNote"
+        type="button"
+    >
+        Another one
+        <span>♥</span>
+    </button>
+
+</section>
+
+
+
+<!-- =================================================
+     FINAL MESSAGE
+================================================= -->
+
+<section class="final">
+
+    <div class="final-content">
+
+        <div class="giant-heart">
+            ♥
+        </div>
+
+
+        <p class="section-label">
+            One last thing
+        </p>
+
+
+        <h2>
+            Carol,
+            <span>this is for you.</span>
+        </h2>
+
+
+        <p class="final-message">
+            If I could keep one thing from all
+            these little moments, it would simply
+            be the feeling of having you around.
+        </p>
+
+
+        <p class="final-message">
+            And if this little website made you
+            smile even for a second,
+            then it did exactly what I wanted it to do.
+        </p>
+
+
+        <p class="forever">
+            Carol
+            <span>♥</span>
+            Always.
+        </p>
+
+
+        <button
+            class="restart-btn"
+            id="restartButton"
+            type="button"
+        >
+            Start again
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     FINAL SURPRISE REVEAL
+================================================= -->
+
+<section
+    class="final-reveal"
+    id="finalReveal"
+>
+
+    <div class="final-reveal-content">
+
+
+        <p class="section-label">
+            Before you leave...
+        </p>
+
+
+        <h2>
+            Carol,
+            <span>wait.</span>
+        </h2>
+
+
+        <p class="reveal-intro">
+            There's one more thing I want you to know.
+        </p>
+
+
+        <button
+            class="reveal-button"
+            id="revealButton"
+            type="button"
+        >
+            Open my heart
+            <span>♥</span>
+        </button>
+
+
+        <div
+            class="secret-message"
+            id="secretMessage"
+        >
+
+            <div class="reveal-heart">
+                ♥
+            </div>
+
+
+            <h3>
+                I LOVE YOU.
+            </h3>
+
+
+            <h4>
+                NOW AND FOREVER.
+            </h4>
+
+
+            <p>
+                Carol, you are the one I choose.
+                The one I want beside me,
+                the one I want to laugh with,
+                make memories with,
+                and keep choosing every day.
+            </p>
+
+
+            <p>
+                You are my only one. ❤️
+            </p>
+
+
+            <div class="final-signature">
+                Forever yours,
+                <br>
+
+                <span>
+                    ♥
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     FULLSCREEN PHOTO VIEWER
+     Created/controlled by script.js
+================================================= -->
+
+
+
+<!-- =================================================
+     FOOTER
+================================================= -->
+
+<footer>
+    Made especially for Carol ♥
+    <br>
+    by Aikens, your man
+</footer>
+
+<!-- ================================================= FINAL SURPRISE ================================================= --> <div class="final-surprise" id="finalSurprise" >
+<div class="final-surprise-content">
+
+    <div class="final-surprise-heart">
+        ♥
+    </div>
+
+    <p class="final-surprise-label">
+        Just one more thing
+    </p>
+
+    <h2>
+        Carol,
+        <span>remember this.</span>
+    </h2>
+
+    <p class="final-surprise-text">
+        If you ever forget how much you mean to me,
+        come back here.
+
+        This little world will always be a reminder
+        of the love I have for you.
+    </p>
+
+    <p class="final-surprise-text">
+        Through the good days,
+        the difficult days,
+        the quiet moments and everything in between...
+    </p>
+
+    <p class="final-surprise-love">
+        I LOVE YOU.
+        <br>
+        <span>NOW AND FOREVER. ♥</span>
+    </p>
+
+    <button
+        class="final-surprise-close"
+        id="finalSurpriseClose"
+        type="button"
+    >
+        Keep this moment with you
+    </button>
+
+</div>
+
+</div>
+
+</main> <!-- ================================================= JAVASCRIPT ================================================= --> <script src="script.js"></script> </body> </html>
